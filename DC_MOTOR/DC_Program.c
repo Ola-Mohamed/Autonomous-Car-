@@ -8,9 +8,15 @@
 
 #include "DC_Interface.h"
 #include "../DIO/DIO_Interface.h"
-#include "../TIMER0/Time0_Interface.h"
-#include "../LCD/lcd.h"
+#include "../TIMER0/Timer0_Types.h"
 
+#include "../TIMER0/Time0_Interface.h"
+
+
+ u8FuncFlag Forward_Flag=0;
+ u8FuncFlag Backward_Flag=0;
+ u8FuncFlag Right_Flag=0;
+ u8FuncFlag Left_Flag=0;
 
 S_Dio DC_Motor1;
 S_Dio DC_Motor2;
@@ -45,7 +51,8 @@ DC_E_ErrorType Motor2_INIT(void)
 DC_E_ErrorType Move_Forward(u8DC_speed speed)
 {
 
-
+	Forward_Flag=1;
+	Backward_Flag=0;
 	if(speed > MAX_SPEED)
 	{
 		Error_DC1 = DC_E_NOT_OK;
@@ -66,6 +73,8 @@ DC_E_ErrorType Move_Forward(u8DC_speed speed)
 
 DC_E_ErrorType Move_Backword(u8DC_speed speed)
 {
+	Forward_Flag=0;
+		Backward_Flag=1;
 
 	if(speed > MAX_SPEED)
 	{
@@ -87,7 +96,8 @@ DC_E_ErrorType Move_Backword(u8DC_speed speed)
 
 DC_E_ErrorType Move_Right(u8DC_speed speed)
 {
-
+	Left_Flag=0;
+	Right_Flag=1;
 	if(speed > MAX_SPEED)
 	{
 		Error_DC2 = DC_E_NOT_OK;
@@ -119,6 +129,9 @@ DC_E_ErrorType Move_Right(u8DC_speed speed)
 DC_E_ErrorType Move_Left(u8DC_speed speed)
 {
 
+
+	Left_Flag=1;
+	Right_Flag=0;
 	if(speed > MAX_SPEED)
 	{
 		Error_DC2 = DC_E_NOT_OK;
@@ -147,6 +160,11 @@ DC_E_ErrorType Move_Left(u8DC_speed speed)
 
 DC_E_ErrorType Motor2_Stop(void)
 {
+	Right_Flag=0;
+	Left_Flag=0;
+
+
+
 	if(Error_DC2==MCAL_Dio_WriteSinglePin(&DC_Motor2,DC2_TERMINAL2,0))
 	{
 		MCAL_Dio_WriteSinglePin(&DC_Motor2,DC2_TERMINAL1,0);
@@ -161,6 +179,13 @@ DC_E_ErrorType Motor2_Stop(void)
 
 DC_E_ErrorType Motor1_Stop(void)
 {
+
+	Right_Flag=0;
+	Left_Flag=0;
+
+
+
+
 	if(Error_DC2==MCAL_Dio_WriteSinglePin(&DC_Motor1,DC1_TERMINAL2,0))
 	{
 		MCAL_Dio_WriteSinglePin(&DC_Motor1,DC1_TERMINAL1,0);
@@ -171,6 +196,3 @@ DC_E_ErrorType Motor1_Stop(void)
 	}
 	return Error_DC1;
 }
-
-
-

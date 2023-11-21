@@ -9,7 +9,7 @@
 #define DC_MOTOR_DC_CONFIG_H_
 
 #include "../DIO/DIO_Types.h"
-#include "../DIO/DIO_Register.h"
+#include "../DIO/DIO_Registers.h"
 
 #define DC_Port					PORTB
 #define DC1_TERMINAL1			PIN2
@@ -17,6 +17,5 @@
 
 #define DC2_TERMINAL1			PIN5
 #define DC2_TERMINAL2			PIN6
-
 
 #endif /* DC_MOTOR_DC_CONFIG_H_ */
