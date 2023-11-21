@@ -8,15 +8,9 @@
 
 #include "DC_Interface.h"
 #include "../DIO/DIO_Interface.h"
-#include "../TIMER0/Timer0_Types.h"
-
 #include "../TIMER0/Time0_Interface.h"
+#include "../LCD/lcd.h"
 
-
- u8FuncFlag Forward_Flag=0;
- u8FuncFlag Backward_Flag=0;
- u8FuncFlag Right_Flag=0;
- u8FuncFlag Left_Flag=0;
 
 S_Dio DC_Motor1;
 S_Dio DC_Motor2;
@@ -31,7 +25,9 @@ DC_E_ErrorType Motor1_INIT(void)
 	DC_Motor1.port_num = DC_Port;
 	DC_Motor1.pin_num = (DC1_TERMINAL1 | DC1_TERMINAL2);
 	DC_Motor1.Direction = OUTPUT;
+
 	Error_DC1 =MCAL_Dio_Init(&DC_Motor1);
+	MCAL_Timer0_Init(Prescaler_64,0,0);
 	return Error_DC1;
 }
 
@@ -43,24 +39,29 @@ DC_E_ErrorType Motor2_INIT(void)
 	DC_Motor2.Direction = OUTPUT;
 	MCAL_Dio_Init(&DC_Motor2);
 	Error_DC2 =MCAL_Dio_Init(&DC_Motor1);
+	MCAL_Timer0_Init(Prescaler_64,0,0);
 	return Error_DC1;
 
 
 }
 
+void SET_Speed(u8DC_speed speed)
+{
+	Motor_Speed = (speed * MAX_TICK) / MAX_SPEED;
+	OCR0 = Motor_Speed;
+}
 DC_E_ErrorType Move_Forward(u8DC_speed speed)
 {
 
-	Forward_Flag=1;
-	Backward_Flag=0;
+
 	if(speed > MAX_SPEED)
 	{
 		Error_DC1 = DC_E_NOT_OK;
 	}
 	else
 	{
-		Motor_Speed = (speed * MAX_TICK) / MAX_SPEED;
-		MCAL_Timer0_Init(Prescaler_1024,0,Motor_Speed);
+
+		SET_Speed(speed);
 		MCAL_Dio_WriteSinglePin(&DC_Motor1,DC1_TERMINAL1,LOGIC_HIGH);
 		MCAL_Dio_WriteSinglePin(&DC_Motor1,DC1_TERMINAL2,LOGIC_LOW);
 	}
@@ -73,8 +74,6 @@ DC_E_ErrorType Move_Forward(u8DC_speed speed)
 
 DC_E_ErrorType Move_Backword(u8DC_speed speed)
 {
-	Forward_Flag=0;
-		Backward_Flag=1;
 
 	if(speed > MAX_SPEED)
 	{
@@ -82,8 +81,7 @@ DC_E_ErrorType Move_Backword(u8DC_speed speed)
 	}
 	else
 	{
-		Motor_Speed = (speed * MAX_TICK) / MAX_SPEED;
-		MCAL_Timer0_Init(Prescaler_1024,0,Motor_Speed);
+		SET_Speed(speed);
 		MCAL_Dio_WriteSinglePin(&DC_Motor1,DC1_TERMINAL1,LOGIC_LOW);
 		MCAL_Dio_WriteSinglePin(&DC_Motor1,DC1_TERMINAL2,LOGIC_HIGH);
 	}
@@ -96,17 +94,14 @@ DC_E_ErrorType Move_Backword(u8DC_speed speed)
 
 DC_E_ErrorType Move_Right(u8DC_speed speed)
 {
-	Left_Flag=0;
-	Right_Flag=1;
+
 	if(speed > MAX_SPEED)
 	{
 		Error_DC2 = DC_E_NOT_OK;
 	}
 	else
 	{
-		Motor_Speed = (speed * MAX_TICK) / MAX_SPEED;
-		MCAL_Timer0_Init(Prescaler_1024,0,Motor_Speed);
-
+		SET_Speed(speed);
 		Error_DC2=MCAL_Dio_WriteSinglePin(&DC_Motor2,DC2_TERMINAL1,1);
 		if(Error_DC2==DC_E_OK)
 		{
@@ -129,18 +124,13 @@ DC_E_ErrorType Move_Right(u8DC_speed speed)
 DC_E_ErrorType Move_Left(u8DC_speed speed)
 {
 
-
-	Left_Flag=1;
-	Right_Flag=0;
 	if(speed > MAX_SPEED)
 	{
 		Error_DC2 = DC_E_NOT_OK;
 	}
 	else
 	{
-		Motor_Speed = (speed * MAX_TICK) / MAX_SPEED;
-		MCAL_Timer0_Init(Prescaler_1024,0,Motor_Speed);
-
+		SET_Speed(speed);
 		Error_DC2=MCAL_Dio_WriteSinglePin(&DC_Motor2,DC2_TERMINAL1,0);
 		if(Error_DC2==DC_E_OK)
 		{
@@ -160,11 +150,6 @@ DC_E_ErrorType Move_Left(u8DC_speed speed)
 
 DC_E_ErrorType Motor2_Stop(void)
 {
-	Right_Flag=0;
-	Left_Flag=0;
-
-
-
 	if(Error_DC2==MCAL_Dio_WriteSinglePin(&DC_Motor2,DC2_TERMINAL2,0))
 	{
 		MCAL_Dio_WriteSinglePin(&DC_Motor2,DC2_TERMINAL1,0);
@@ -179,13 +164,6 @@ DC_E_ErrorType Motor2_Stop(void)
 
 DC_E_ErrorType Motor1_Stop(void)
 {
-
-	Right_Flag=0;
-	Left_Flag=0;
-
-
-
-
 	if(Error_DC2==MCAL_Dio_WriteSinglePin(&DC_Motor1,DC1_TERMINAL2,0))
 	{
 		MCAL_Dio_WriteSinglePin(&DC_Motor1,DC1_TERMINAL1,0);
@@ -196,3 +174,6 @@ DC_E_ErrorType Motor1_Stop(void)
 	}
 	return Error_DC1;
 }
+
+
+
