@@ -14,7 +14,7 @@
 #include "DIO_Types.h"           // Include DIO data types
 #include "DIO_Private.h"         // Include DIO private functions
 #include "DIO_Config.h"          // Include DIO configuration
-#include "../Common_Files/common_macros.h"  // Include common macros
+#include "../../common_macros.h"  // Include common macros
 
 /****************************************Functions Prototypes******************************/
 

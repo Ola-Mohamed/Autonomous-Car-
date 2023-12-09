@@ -11,7 +11,9 @@
 
 #include "DIO_interface.h"
 #include "DIO_Types.h"
-#include "../LCD/lcd.h"
+
+
+//#include "../LCD/lcd.h"
 
 DIO_E_ErrorType MCAL_Dio_Init(S_Dio *Dio_Config)
 {
@@ -52,6 +54,7 @@ DIO_E_ErrorType MCAL_Dio_Init(S_Dio *Dio_Config)
             Mask1 = ((DIO_DDRB) & (~(Dio_Config->pin_num)));
             // Set the port direction for PORTB
             DIO_DDRB = Mask1 | Mask2;
+
             break;
         case PORTC_ID:
             // Calculate Mask1 for PORTC
@@ -184,6 +187,7 @@ DIO_E_ErrorType MCAL_Dio_SetPinDirection(S_Dio *Dio_ConfigPin)
             Mask1 = ((DIO_DDRB) & (~(Dio_ConfigPin->pin_num)));
             // Set the pin direction for PORTB
             DIO_DDRB = Mask1 | Mask2;
+
             break;
         case PORTC_ID:
             // Calculate Mask1 for PORTC
@@ -490,6 +494,7 @@ DIO_E_ErrorType MCAL_Dio_WriteSinglePin(S_Dio *Dio_WritePin, E_DioPin Pin_Num, u
     else
     {
 
+
         // Loop through configured pins to find the bitNumber corresponding to Pin_Num
         for (int i = 0; i < DIO_CONFIGURED_PINS; i++)
         {
@@ -521,15 +526,17 @@ DIO_E_ErrorType MCAL_Dio_WriteSinglePin(S_Dio *Dio_WritePin, E_DioPin Pin_Num, u
             }
             break;
         case PORTB_ID:
-        	            // Check Pin_value and set or clear the corresponding bit in DIO_PORTB
-            if (Pin_value == 1)
+        	     // Check Pin_value and set or clear the corresponding bit in DIO_PORTB
+            if (Pin_value == LOGIC_HIGH)
             {
 
                 SET_BIT(DIO_PORTB, bitNumber);
 
+
             }
             else
             {
+
                 CLEAR_BIT(DIO_PORTB, bitNumber);
 
             }
