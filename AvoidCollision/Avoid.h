@@ -11,6 +11,8 @@
 #include"HAL/UltraSonic/UltraSonic.h"
 #include "HAL/DC_MOTOR/DC_Interface.h"
 #include "HAL/LCD/LCD_Interface.h"
+#include "ServiceAvoid/ServiceAvoid.h"
+
 
 void AvoidCollision(void);
 
