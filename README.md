@@ -46,7 +46,8 @@ This is how we use RTOS, especially FreeRTOS in our Desgin:
 ![sprints](https://github.com/Ola-Mohamed/Autonomous-Car-/blob/main/Media/Sprints.png)
 
 ## Video 
- Check our small DEMO 
+>  Check our small DEMO
+
  [DEMO](https://github.com/Ola-Mohamed/Autonomous-Car-/blob/main/NtiGP_(Final).mp4)
 ## Team Members
 
