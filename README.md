@@ -56,8 +56,8 @@ This Project was created due to the efforts of all the team members and their in
     <td align="center"><a href="https://github.com/aya-ali-99"><img src="https://avatars.githubusercontent.com/u/146674890?v=4" width="100px;" alt=""/><br /><sub><b>Aya Ali </b></sub></a><br /></td>
     <td align="center"><a href="https://github.com/fatmaeltaha"><img src="https://avatars.githubusercontent.com/u/148214527?v=4" width="100px;" alt=""/><br /><sub><b>Fatma Abd-elrhem</b></sub></a><br /></td>
     <td align="center"><a href="https://github.com/Fatma-mosaad"><img src="https://avatars.githubusercontent.com/u/142949799?v=4" width="100px;" alt=""/><br /><sub><b>Fatma Mosaad</b></sub></a><br /></td>
-    <td align="center"><a href=""><img src="" width="100px;" alt=""/><br /><sub><b>Elaf Mohamed</b></sub></a><br /></td>
-    <td align="center"><a href="https"><img src="https:" width="100px;" alt=""/><br /><sub><b>Mostafa Mohamed </b></sub>
+    <td align="center"><a href="https://github.com/elaf76"><img src="https://avatars.githubusercontent.com/u/148910937?v=4" width="100px;" alt=""/><br /><sub><b>Elaf Mohamed</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/Mostafa-1997"><img src="https://avatars.githubusercontent.com/u/131954621?v=4" width="100px;" alt=""/><br /><sub><b>Mostafa Mohamed </b></sub>
      <td align="center"><a href="https://github.com/MohamedSaad71"><img src="https://avatars.githubusercontent.com/u/139966856?v=4" width="100px;" alt=""/><br /><sub><b>Mohamed Saed </b></sub></a><br /></td>
     </a><br /></td>
     </tr>
