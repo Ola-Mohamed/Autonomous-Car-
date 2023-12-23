@@ -1,5 +1,6 @@
 # Autonomous Car
-> Graduation project from Automotive embedded track in NTI 4-Months program 
+
+>  Graduation project from Automotive embedded track in NTI 4-Months program 
 
 # overview 
 Autonomous cars, also known as self-driving cars or driverless cars, are vehicles equipped with advanced technologies that can navigate and operate without human intervention. Autonomous cars often incorporate various ADAS features as part of their overall autonomous driving system. ADAS stands for Advanced Driver Assistance Systems, which are technologies designed to improve vehicle safety, increase situational awareness, and enhance the driving experience. These systems are commonly found in modern cars and serve as a precursor or a subset of the technology used in autonomous vehicles.
@@ -46,7 +47,7 @@ This is how we use RTOS, especially FreeRTOS in our Desgin:
 
 ## Video 
  Check our small DEMO 
- ![DEMO](https://github.com/Ola-Mohamed/Autonomous-Car-/blob/main/NtiGP_(Final).mp4.mp4)
+ [DEMO](https://github.com/Ola-Mohamed/Autonomous-Car-/blob/main/NtiGP_(Final).mp4)
 ## Team Members
 
 This Project was created due to the efforts of all the team members and their indescribable hard work.
