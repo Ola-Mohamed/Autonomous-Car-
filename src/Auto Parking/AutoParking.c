@@ -33,18 +33,17 @@ void AutoParking_Task(){
 
 		Move_Forward(DC_SPEED_AUTOPARKING);
 
-		//if( ultrasonic check if distance 50cm begin  && Parking_Available == 0 ){
-		//  calculate time 1 and complete check untill find other
-		// object calculate time2 , time = time 2 - time 1
-
-
+		
 		// --> Read ultra Right
+		DISTANCE_RIGHT = UltraSonic_EX_INT4_Distance();
+		
 		if(DISTANCE_RIGHT >= AUTO_DISTANCE && Parking_Available == 0 ){
 
 			TCNT2=0;
 			while(TCNT2< SPECIFIC_TIME && DISTANCE_RIGHT >= AUTO_DISTANCE)
 			{
 				// --> Read ultra Right
+				DISTANCE_RIGHT = UltraSonic_EX_INT4_Distance();
 			}
 			if(TCNT2 >= SPECIFIC_TIME ){
 
@@ -56,11 +55,16 @@ void AutoParking_Task(){
 		}
 		else if(Parking_Available ==1){
 			// --> Read ultra Back
+			DISTANCE_BACKWARD = UltraSonic_EX_INT5_Distance();
 			// --> Read ultra Right
+			DISTANCE_RIGHT = UltraSonic_EX_INT4_Distance();
+			
 			while(DISTANCE_RIGHT > 10 || DISTANCE_BACKWARD > 10 )
 			{
 				// --> Read ultra Back
+				DISTANCE_BACKWARD = UltraSonic_EX_INT5_Distance();
 				// --> Read ultra Right
+				DISTANCE_RIGHT = UltraSonic_EX_INT4_Distance();
 				Move_Right(DC_SPEED_AUTOPARKING_Right);
 				Move_Backword(DC_SPEED_AUTOPARKING);
 			}
@@ -70,11 +74,15 @@ void AutoParking_Task(){
 
 			
 			// --> Read ultra Back
+			DISTANCE_BACKWARD = UltraSonic_EX_INT5_Distance();
 			// --> Read ultra Right
+			DISTANCE_RIGHT = UltraSonic_EX_INT4_Distance();
 			while(DISTANCE_RIGHT > 10 || DISTANCE_BACKWARD > 10 )
 			{
 				// --> Read ultra Back
+				DISTANCE_BACKWARD = UltraSonic_EX_INT5_Distance();
 				// --> Read ultra Right
+				DISTANCE_RIGHT = UltraSonic_EX_INT4_Distance();
 				Move_Left(DC_SPEED_AUTOPARKING_Left);
 				Move_Backword(DC_SPEED_AUTOPARKING);
 			}
